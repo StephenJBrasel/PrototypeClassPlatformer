@@ -20,6 +20,13 @@ public class PlayerController : MonoBehaviour
 	private float jumpTime;
 	private Vector3 moveDirection = Vector3.zero;
 
+
+	private bool slowdown = false;
+	[SerializeField]
+	private float slowTime = 1.0f;
+	[SerializeField]
+	private float slowspeed = 0.2f;
+
 	public bool resetJumps()
 	{
 		jumps = 0;
@@ -36,12 +43,17 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+		if (slowdown)
+		{
+			Time.timeScale = 1;
+		}
+
 		if (characterController.isGrounded)
 		{
 			// We are grounded, so reset number of jumps and 
 			// recalculate move direction directly from axes
 			resetJumps();
-			moveDirection = new Vector3(Input.GetAxis("Horizontal"), 0.0f, Input.GetAxis("Vertical"));
+			moveDirection = new Vector3(Input.GetAxis("Horizontal"), 0.0f, 0.0f);
 			moveDirection *= speed;
 
 			if (Input.GetButton("Jump"))
@@ -75,6 +87,26 @@ public class PlayerController : MonoBehaviour
 
 		// Move the controller
 		characterController.Move(moveDirection * Time.deltaTime);
+
+		if (Input.GetButton("Fire1") && !slowdown)
+		{
+			slowdown = true;
+			Debug.Log($"Start time: {Time.time}, Seconds: {slowTime}");
+			StartCoroutine(SlowTime(slowTime));
+		}
+
+		if (slowdown)
+		{
+			Time.timeScale = slowspeed;
+		}
+	}
+
+	public IEnumerator SlowTime(float seconds)
+	{
+		yield return new WaitForSecondsRealtime(seconds); 
+		Debug.Log($"End time: {Time.time}");
+		slowdown = false;
+		Time.timeScale = 1.0f;
 	}
 
 	private void Jump()
