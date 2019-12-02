@@ -72,22 +72,21 @@ public class PlayerController : MonoBehaviour
 		//if player is moving down, speed up the player so they reach the ground faster.
 		if (moveDirection.y < 0f)
 		{
-			moveDirection += Vector3.up * Physics.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
+			moveDirection += Vector3.up * Physics.gravity.y * (fallMultiplier - 1) * Time.unscaledDeltaTime;
 		}
 		// if player is moving up but no longer holding down jump, slow the player.
 		else if (moveDirection.y > 0f && !Input.GetButton("Jump"))
 		{
-			moveDirection += Vector3.up * Physics.gravity.y * (lowJumpMultiplier - 1) * Time.deltaTime;
+			moveDirection += Vector3.up * Physics.gravity.y * (lowJumpMultiplier - 1) * Time.unscaledDeltaTime;
 		}
 
 		// Apply gravity. Gravity is multiplied by deltaTime twice (once here, and once below
 		// when the moveDirection is multiplied by deltaTime). This is because gravity should be applied
 		// as an acceleration (ms^-2)
-		moveDirection.y -= gravity * Time.deltaTime;
+		moveDirection.y -= gravity * Time.unscaledDeltaTime;
 
 		// Move the controller
-		characterController.Move(moveDirection * Time.deltaTime);
-
+		characterController.Move(moveDirection * Time.unscaledDeltaTime);
 		if (Input.GetButton("Fire1") && !slowdown)
 		{
 			slowdown = true;
