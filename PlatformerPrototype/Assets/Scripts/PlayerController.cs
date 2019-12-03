@@ -56,14 +56,14 @@ public class PlayerController : MonoBehaviour
 			moveDirection = new Vector3(Input.GetAxis("Horizontal"), 0.0f, 0.0f);
 			moveDirection *= speed;
 
-			if (Input.GetButtonDown("Jump"))
+			if (Input.GetButton("Jump"))
 			{
 				Jump();
 			}
 		}
 		else if (jumps < maxJumps && Time.time - jumpTime > multiJumpDelay)
 		{
-			if (Input.GetButtonDown("Jump"))
+			if (Input.GetButton("Jump"))
 			{
 				Jump();
 			}
