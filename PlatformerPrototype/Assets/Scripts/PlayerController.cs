@@ -56,14 +56,14 @@ public class PlayerController : MonoBehaviour
 			moveDirection = new Vector3(Input.GetAxis("Horizontal"), 0.0f, 0.0f);
 			moveDirection *= speed;
 
-			if (Input.GetButton("Jump"))
+			if (Input.GetButtonDown("Jump"))
 			{
 				Jump();
 			}
 		}
 		else if (jumps < maxJumps && Time.time - jumpTime > multiJumpDelay)
 		{
-			if (Input.GetButton("Jump"))
+			if (Input.GetButtonDown("Jump"))
 			{
 				Jump();
 			}
@@ -90,7 +90,6 @@ public class PlayerController : MonoBehaviour
 		if (Input.GetButton("Fire1") && !slowdown)
 		{
 			slowdown = true;
-			Debug.Log($"Start time: {Time.time}, Seconds: {slowTime}");
 			StartCoroutine(SlowTime(slowTime));
 		}
 
@@ -103,7 +102,6 @@ public class PlayerController : MonoBehaviour
 	public IEnumerator SlowTime(float seconds)
 	{
 		yield return new WaitForSecondsRealtime(seconds); 
-		Debug.Log($"End time: {Time.time}");
 		slowdown = false;
 		Time.timeScale = 1.0f;
 	}
