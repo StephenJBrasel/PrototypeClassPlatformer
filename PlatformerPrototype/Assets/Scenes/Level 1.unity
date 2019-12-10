@@ -195,6 +195,39 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 34874623}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &177102567 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7190840337605686583, guid: 58f69ee805673154bbe252423858f1dd,
+    type: 3}
+  m_PrefabInstance: {fileID: 297617565}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &177102568
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 177102567}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b05f9810a144fb74585559663519548e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 6
+  jumpSpeed: 0.3
+  gravity: 1
+  fallMultiplier: 3.5
+  lowJumpMultiplier: 2
+  multiJumpDelay: 0.2
+  maxJumps: 2
+  slowTime: 3
+  slowspeed: 0.1
+--- !u!4 &177102570 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7190840337606043927, guid: 58f69ee805673154bbe252423858f1dd,
+    type: 3}
+  m_PrefabInstance: {fileID: 297617565}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &297617565
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -267,11 +300,18 @@ PrefabInstance:
       propertyPath: m_Height
       value: 1.2
       objectReference: {fileID: 0}
-    - target: {fileID: 7190840338303256227, guid: 58f69ee805673154bbe252423858f1dd,
-        type: 3}
+    - target: {fileID: 0}
       propertyPath: slowTime
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_WhatIsGround.m_Bits
+      value: 256
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_GroundCheck
+      value: 
+      objectReference: {fileID: 177102570}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 58f69ee805673154bbe252423858f1dd, type: 3}
 --- !u!1001 &438574231
@@ -644,7 +684,7 @@ GameObject:
   - component: {fileID: 675375904}
   - component: {fileID: 675375903}
   - component: {fileID: 675375902}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Platform (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1008,7 +1048,7 @@ GameObject:
   - component: {fileID: 1075056696}
   - component: {fileID: 1075056695}
   - component: {fileID: 1075056694}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Platform (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1099,7 +1139,7 @@ GameObject:
   - component: {fileID: 1089854931}
   - component: {fileID: 1089854930}
   - component: {fileID: 1089854929}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Platform (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1190,7 +1230,7 @@ GameObject:
   - component: {fileID: 1119986494}
   - component: {fileID: 1119986493}
   - component: {fileID: 1119986492}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Platform (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1438,7 +1478,7 @@ GameObject:
   - component: {fileID: 1261962399}
   - component: {fileID: 1261962398}
   - component: {fileID: 1261962397}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Platform (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1659,7 +1699,7 @@ GameObject:
   - component: {fileID: 1346169670}
   - component: {fileID: 1346169669}
   - component: {fileID: 1346169668}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Platform (7)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1999,7 +2039,7 @@ GameObject:
   - component: {fileID: 1945581581}
   - component: {fileID: 1945581580}
   - component: {fileID: 1945581579}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Floor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2165,7 +2205,7 @@ GameObject:
   - component: {fileID: 2035300981}
   - component: {fileID: 2035300980}
   - component: {fileID: 2035300979}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Platform (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

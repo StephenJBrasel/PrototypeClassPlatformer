@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 877129453458987588}
   - component: {fileID: 877129453458987592}
   - component: {fileID: 5103521450356073470}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: FallingRubble
   m_TagString: Untagged
   m_Icon: {fileID: 0}
