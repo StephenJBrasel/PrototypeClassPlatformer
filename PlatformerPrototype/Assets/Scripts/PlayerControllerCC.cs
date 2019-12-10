@@ -21,7 +21,7 @@ public class PlayerControllerCC : MonoBehaviour
     private Vector3 moveDirection = Vector3.zero;
 
 
-    private bool slowdown = false;
+    public bool slowdown = false;
     private bool timePowerIsReset = true;
     [SerializeField]
     private float slowTime = 3.0f;

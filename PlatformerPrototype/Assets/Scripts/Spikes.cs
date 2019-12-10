@@ -13,7 +13,7 @@ public class Spikes : MonoBehaviour
 
 	private void OnTriggerEnter(Collider other)
 	{
-		if (other.gameObject.CompareTag("Player"))
+		if (other.gameObject.CompareTag("Player") && !other.GetComponent<PlayerControllerCC>().slowdown)
 		{
 			Damage();
 			other.GetComponent<Reset>().ResetEverything();
