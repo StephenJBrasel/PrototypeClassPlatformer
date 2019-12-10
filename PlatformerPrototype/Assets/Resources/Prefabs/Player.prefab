@@ -732,10 +732,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 6
-  jumpSpeed: 0.3
+  jumpSpeed: 0.25
   gravity: 1
-  fallMultiplier: 3.5
-  lowJumpMultiplier: 2
+  fallMultiplier: 1.1
+  lowJumpMultiplier: 1
   multiJumpDelay: 0.2
   maxJumps: 2
   slowTime: 3
