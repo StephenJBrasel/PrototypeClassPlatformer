@@ -16,6 +16,7 @@ public class Spikes : MonoBehaviour
 		if (other.gameObject.CompareTag("Player"))
 		{
 			Damage();
+			other.GetComponent<Reset>().ResetEverything();
 		}
 	}
 
@@ -23,7 +24,7 @@ public class Spikes : MonoBehaviour
 	{
 		if (hurtImage == null) return;
 		FadeImage fadeImage = hurtImage.GetComponent<FadeImage>();
-		if (fadeImage == null) return; 
+		if (fadeImage == null) return;
 		fadeImage.ResetAlpha();
 	}
 }
