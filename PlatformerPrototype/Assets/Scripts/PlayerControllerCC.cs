@@ -22,8 +22,11 @@ public class PlayerControllerCC : MonoBehaviour
 
 
     private bool slowdown = false;
+    private bool timePowerIsReset = true;
     [SerializeField]
-    private float slowTime = 1.0f;
+    private float slowTime = 3.0f;
+    [SerializeField]
+    private float timePowerResetTime = 3.0f;
     [SerializeField]
     private float slowspeed = 0.2f;
 
@@ -55,10 +58,9 @@ public class PlayerControllerCC : MonoBehaviour
 
     private void ManageTime()
     {
-        if (Input.GetButtonDown("Fire1") && !slowdown)
+        if (Input.GetButtonDown("Fire1") && !slowdown && timePowerIsReset)
         {
-            slowdown = true;
-            StartCoroutine(SlowTime(slowTime));
+            StartCoroutine(SlowTime(slowTime, timePowerResetTime));
         }
 
         if (slowdown)
@@ -112,11 +114,15 @@ public class PlayerControllerCC : MonoBehaviour
         characterController.Move(moveDirection);
     }
 
-    public IEnumerator SlowTime(float seconds)
+    public IEnumerator SlowTime(float seconds, float waitTime)
     {
+        slowdown = true;
+        timePowerIsReset = false;
         yield return new WaitForSecondsRealtime(seconds);
         slowdown = false;
         Time.timeScale = 1.0f;
+        yield return new WaitForSecondsRealtime(waitTime);
+        timePowerIsReset = true;
     }
 
     private void Jump()
