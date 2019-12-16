@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PlayerControllerCC : MonoBehaviour
 {
@@ -16,15 +17,16 @@ public class PlayerControllerCC : MonoBehaviour
     public float multiJumpDelay = 0.2f;
     public ushort maxJumps = 2;
 
+    public UnityEvent OnTimeSlowEvent;
+    public UnityEvent OnTimeResumeEvent;
+
     private ushort jumps = 0;
     private float jumpTime;
     private Vector3 moveDirection = Vector3.zero;
-
-
-    public bool slowdown = false;
+    public bool slowdown { get; private set; } = false; //STOP MAKING THINGS PUBLIC.
     private bool timePowerIsReset = true;
     [SerializeField]
-    private float slowTime = 3.0f;
+    public float slowTime = 3.0f;
     [SerializeField]
     private float timePowerResetTime = 3.0f;
     [SerializeField]
@@ -37,6 +39,8 @@ public class PlayerControllerCC : MonoBehaviour
         jumps = 0;
         return true;
     }
+
+    public float getSlowTime { get { return slowTime; } private set { } }
 
 	private void Awake()
 	{
@@ -61,6 +65,7 @@ public class PlayerControllerCC : MonoBehaviour
         if (Input.GetButtonDown("Fire1") && !slowdown && timePowerIsReset)
         {
             StartCoroutine(SlowTime(slowTime, timePowerResetTime));
+            OnTimeSlowEvent.Invoke();
         }
 
         if (slowdown)
@@ -98,7 +103,7 @@ public class PlayerControllerCC : MonoBehaviour
 
 
         //if player is moving down, speed up the player so they reach the ground faster.
-        if (moveDirection.y < 0f)
+        if (moveDirection.y < 0f || characterController.velocity.y < 0f)
         {
             moveDirection += (Vector3.up * -gravity * fallMultiplier * Time.unscaledDeltaTime);
         }
@@ -121,6 +126,7 @@ public class PlayerControllerCC : MonoBehaviour
         yield return new WaitForSecondsRealtime(seconds);
         slowdown = false;
         Time.timeScale = 1.0f;
+        OnTimeResumeEvent.Invoke();
         yield return new WaitForSecondsRealtime(waitTime);
         timePowerIsReset = true;
     }
