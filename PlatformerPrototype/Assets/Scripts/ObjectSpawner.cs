@@ -13,15 +13,28 @@ public class ObjectSpawner : MonoBehaviour
 	// Start is called before the first frame update
 	void Start()
     {
-		StartCoroutine(SpawnObject());
+		StartCoroutine(SpawnObjectRepeat(interval));
     }
 
-	private IEnumerator SpawnObject()
+	public void SpawnObjectAfter(float seconds)
 	{
-		yield return new WaitForSeconds(interval);
+		StartCoroutine(SpawnObject(seconds));
+	}
+
+	private IEnumerator SpawnObject(float seconds)
+	{
+		yield return new WaitForSeconds(seconds);
 		//spawn object here.
 		GameObject rubble = Instantiate(
 			(GameObject)Resources.Load($"Prefabs/{prefab.name}"), new Vector3(posx, posy, 0), Quaternion.identity);
-		StartCoroutine(SpawnObject());
+	}
+
+	private IEnumerator SpawnObjectRepeat(float seconds)
+	{
+		yield return new WaitForSeconds(seconds);
+		//spawn object here.
+		GameObject rubble = Instantiate(
+			(GameObject)Resources.Load($"Prefabs/{prefab.name}"), new Vector3(posx, posy, 0), Quaternion.identity);
+		StartCoroutine(SpawnObjectRepeat(seconds));
 	}
 }
