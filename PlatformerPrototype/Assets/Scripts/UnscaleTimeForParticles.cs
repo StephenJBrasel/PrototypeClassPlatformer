@@ -19,10 +19,4 @@ public class UnscaleTimeForParticles : MonoBehaviour
         //pMain.useUnscaledTime = true;
         pSystem.Simulate(Time.unscaledDeltaTime, true, false);
     }
-
-    //// Update is called once per frame
-    //void Update()
-    //{
-    //    pSystem.Simulate(Time.unscaledDeltaTime, true, false);
-    //}
 }
