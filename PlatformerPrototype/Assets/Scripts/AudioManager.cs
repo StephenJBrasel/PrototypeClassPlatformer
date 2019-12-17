@@ -4,8 +4,8 @@ using System;
 public class AudioManager : MonoBehaviour
 {
 	[SerializeField] private Sound[] sounds;
-	[SerializeField] private readonly string SFXSlider = "SoundsSliderBar";
-	[SerializeField] private readonly string MusicSlider = "MusicSliderBar";
+	//[SerializeField] private readonly string SFXSlider = "SoundsSliderBar";
+	//[SerializeField] private readonly string MusicSlider = "MusicSliderBar";
 
 	[Range(0.5f, 1.0f)]
 	[SerializeField] private float pitchRangeMin;
@@ -14,11 +14,11 @@ public class AudioManager : MonoBehaviour
 
 	[SerializeField] private int maxVolume = 100;
 
-    private Sound temp;
-    Sound temp2;
-    Sound s;
-    float SFXsliderVolume;
-    float MUSICsliderVolume;
+    //private Sound temp;
+    //Sound temp2;
+    private Sound s;
+    //float SFXsliderVolume;
+    //float MUSICsliderVolume;
 
 
 
@@ -39,15 +39,16 @@ public class AudioManager : MonoBehaviour
 
     void Update()
     {
-        if (temp.type == Sound.SoundType.SFX)
-        {
-            SFXsliderVolume = (float)PlayerPrefs.GetInt(SFXSlider, 100) / (float)maxVolume;
-            temp.source.volume = temp.volume * SFXsliderVolume;
-        }else if(temp.type == Sound.SoundType.Music)
-        {
-            MUSICsliderVolume = (float)PlayerPrefs.GetInt(MusicSlider, 100) / (float)maxVolume;
-            temp.source.volume = temp.volume * MUSICsliderVolume;
-        }
+        //if (temp.type == Sound.SoundType.SFX)
+        //{
+        //    SFXsliderVolume = (float)PlayerPrefs.GetInt(SFXSlider, 100) / (float)maxVolume;
+        //    temp.source.volume = temp.volume * SFXsliderVolume;
+        //}
+        //else if(temp.type == Sound.SoundType.Music)
+        //{
+        //    MUSICsliderVolume = (float)PlayerPrefs.GetInt(MusicSlider, 100) / (float)maxVolume;
+        //    temp.source.volume = temp.volume * MUSICsliderVolume;
+        //}
 
     }
 
@@ -62,17 +63,19 @@ public class AudioManager : MonoBehaviour
 			{
 				case Sound.SoundType.SFX:
 					s.source.pitch = UnityEngine.Random.Range(pitchRangeMin, pitchRangeMax);
-					SFXsliderVolume = (float)PlayerPrefs.GetInt(SFXSlider, 100)/ (float)maxVolume;
-                    s.source.volume = s.volume * SFXsliderVolume;
+					//SFXsliderVolume = (float)PlayerPrefs.GetInt(SFXSlider, 100)/ (float)maxVolume;
+                    s.source.volume = s.volume;
+                    //s.source.volume = s.volume * SFXsliderVolume;
                     break;
 				case Sound.SoundType.Music:
-					MUSICsliderVolume = (float)PlayerPrefs.GetInt(MusicSlider, 100) / (float)maxVolume;
-                    s.source.volume = s.volume * MUSICsliderVolume;
-                    temp = s;
+					//MUSICsliderVolume = (float)PlayerPrefs.GetInt(MusicSlider, 100) / (float)maxVolume;
+                    s.source.volume = s.volume;
+                    //s.source.volume = s.volume * MUSICsliderVolume;
+                    //temp = s;
                     break;
 				default:
-                    SFXsliderVolume = 0;
-                    MUSICsliderVolume = 0;
+                    //SFXsliderVolume = 0;
+                    //MUSICsliderVolume = 0;
                     break;
 			}
 			s.source.Play();
@@ -83,13 +86,13 @@ public class AudioManager : MonoBehaviour
 
     public void Stop()
     {
-        if (temp == null)
-        {
-            Debug.Log("No music playing");
-        }
-        else
-        {
-            temp.source.Stop();
-        }
+        //if (temp == null)
+        //{
+        //    Debug.Log("No music playing");
+        //}
+        //else
+        //{
+        //    temp.source.Stop();
+        //}
     }
 }

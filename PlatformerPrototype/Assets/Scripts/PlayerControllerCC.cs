@@ -26,13 +26,15 @@ public class PlayerControllerCC : MonoBehaviour
     public bool slowdown { get; private set; } = false; //STOP MAKING THINGS PUBLIC.
     private bool timePowerIsReset = true;
     [SerializeField]
-    public float slowTime = 3.0f;
+    private float slowTime = 3.0f;
+    public float getSlowTime { get { return slowTime; } private set { } }
     [SerializeField]
     private float timePowerResetTime = 3.0f;
     [SerializeField]
     private float slowspeed = 0.2f;
 
 	private float fixedDeltaTime;
+    private AudioManager audioManager;
 
     public bool resetJumps()
     {
@@ -40,11 +42,11 @@ public class PlayerControllerCC : MonoBehaviour
         return true;
     }
 
-    public float getSlowTime { get { return slowTime; } private set { } }
 
 	private void Awake()
 	{
         this.fixedDeltaTime = Time.fixedDeltaTime;
+        audioManager = FindObjectOfType<AudioManager>();
     }
 
 	// Start is called before the first frame update
@@ -123,16 +125,19 @@ public class PlayerControllerCC : MonoBehaviour
     {
         slowdown = true;
         timePowerIsReset = false;
+        audioManager.Play("TimeSlow");
         yield return new WaitForSecondsRealtime(seconds);
         slowdown = false;
         Time.timeScale = 1.0f;
         OnTimeResumeEvent.Invoke();
+        audioManager.Play("TimeResume");
         yield return new WaitForSecondsRealtime(waitTime);
         timePowerIsReset = true;
     }
 
     private void Jump()
     {
+        audioManager.Play("Jump");
         moveDirection.y = jumpSpeed;
         jumps++;
         jumpTime = Time.unscaledTime;

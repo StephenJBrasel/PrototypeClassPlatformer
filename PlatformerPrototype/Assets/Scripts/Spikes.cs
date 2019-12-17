@@ -5,10 +5,12 @@ using UnityEngine;
 public class Spikes : MonoBehaviour
 {
 	GameObject hurtImage;
+	private AudioManager audioManager;
 
 	private void Awake()
 	{
 		hurtImage = GameObject.Find("HurtImage");
+		audioManager = FindObjectOfType<AudioManager>();
 	}
 
 	private void OnTriggerEnter(Collider other)
@@ -22,6 +24,7 @@ public class Spikes : MonoBehaviour
 
 	private void Damage()
 	{
+		audioManager.Play("Damage");
 		if (hurtImage == null) return;
 		FadeImage fadeImage = hurtImage.GetComponent<FadeImage>();
 		if (fadeImage == null) return;
