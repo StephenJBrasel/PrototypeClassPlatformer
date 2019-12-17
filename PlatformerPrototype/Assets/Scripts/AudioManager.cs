@@ -8,9 +8,9 @@ public class AudioManager : MonoBehaviour
 	//[SerializeField] private readonly string MusicSlider = "MusicSliderBar";
 
 	[Range(0.5f, 1.0f)]
-	[SerializeField] private float pitchRangeMin;
+	[SerializeField] private float pitchRangeMin = 0.8f;
 	[Range(1.0f, 1.5f)]
-	[SerializeField] private float pitchRangeMax;
+	[SerializeField] private float pitchRangeMax = 1.2f;
 
 	[SerializeField] private int maxVolume = 100;
 
