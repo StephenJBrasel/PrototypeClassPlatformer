@@ -54,12 +54,6 @@ public class PlayerControllerCC : MonoBehaviour
     private float fixedDeltaTime;
     private AudioManager audioManager;
 
-    public bool resetJumps()
-    {
-        jumps = 0;
-        return true;
-    }
-
 	private void Awake()
 	{
         this.fixedDeltaTime = Time.fixedDeltaTime;
@@ -72,7 +66,6 @@ public class PlayerControllerCC : MonoBehaviour
 	void Start()
     {
         characterController = GetComponent<CharacterController>();
-        resetJumps();
     }
 
     // Update is called once per frame
@@ -124,18 +117,24 @@ public class PlayerControllerCC : MonoBehaviour
         {
             transform.eulerAngles = Vector3.up * 270f;
         }
-		#endregion TURNING
+        else if (Input.GetAxis("Vertical") > 0) // Going up.
+        {
+            transform.eulerAngles = Vector3.up * 0f;
+        }
+        else if (Input.GetAxis("Vertical") < 0)
+        {
+            transform.eulerAngles = Vector3.up * 180f;
+        }
+        #endregion TURNING
 
-		animator.SetFloat("Speed", Mathf.Abs(moveDirection.x));
+        animator.SetFloat("Speed", Mathf.Abs(moveDirection.x));
 
 		#region JUMPING
+        
 		if (characterController.isGrounded)
         {
-            // We are grounded, so reset number of jumps and 
-            // recalculate move direction directly from axes
             if (!wasGrounded) { OnLanding(); }
             moveDirection.y = 0f;
-            resetJumps();
             if (Input.GetButtonDown("Jump")) Jump();
         }
         else if (jumps < maxJumps && Time.unscaledTime - jumpStartTime > multiJumpDelay)
@@ -153,19 +152,24 @@ public class PlayerControllerCC : MonoBehaviour
         {
             moveDirection.y += (-gravity * lowJumpMultiplier * Time.unscaledDeltaTime);
         }
-        
         moveDirection.y -= (gravity * Time.unscaledDeltaTime);
 
         #endregion JUMPING
-
 
         wasGrounded = characterController.isGrounded;
         // Move the controller
         characterController.Move(moveDirection);
     }
+
+    public void resetJumps()
+    {
+        jumps = 0;
+    }
+
     private void OnLanding()
     {
         animator.SetBool("IsJumping", false);
+        resetJumps();
     }
 
     public IEnumerator SlowTime(float seconds, float waitTime)
