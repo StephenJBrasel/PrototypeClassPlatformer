@@ -5,8 +5,9 @@ using UnityEngine.Events;
 
 public class PlayerControllerRB : MonoBehaviour
 {
+    public Animator animator;
 
-	public float speed = 6.0f;
+    public float speed = 6.0f;
 	public float jumpSpeed = 8.0f;
 	public float gravity = 20.0f;
 
@@ -78,7 +79,7 @@ public class PlayerControllerRB : MonoBehaviour
         }
     }
 
-    private void OnDrawGizmos()
+    private void DrawGizmos()
     {
         Gizmos.DrawSphere(m_GroundCheck.position, k_GroundedRadius);
     }
@@ -115,6 +116,8 @@ public class PlayerControllerRB : MonoBehaviour
         moveDirection = new Vector3(Input.GetAxis("Horizontal"), 0.0f, 0.0f);
         moveDirection *= speed;
 
+        animator.SetFloat("Speed", Mathf.Abs(moveDirection.x));
+
         if (m_Grounded)
         {
             // We are grounded, so reset number of jumps and 
@@ -124,6 +127,7 @@ public class PlayerControllerRB : MonoBehaviour
             if (Input.GetButtonDown("Jump"))
             {
                 Jump();
+                animator.SetBool("IsJumping", true);
             }
         }
         else if (jumps < maxJumps && Time.time - jumpTime > multiJumpDelay)
@@ -153,6 +157,11 @@ public class PlayerControllerRB : MonoBehaviour
         // Move the controller
         rb.velocity = Vector3.SmoothDamp(rb.velocity, moveDirection, ref m_Velocity, m_MovementSmoothing);
         //characterController.Move(moveDirection * Time.unscaledDeltaTime);
+    }
+
+    public void OnLanding ()
+    {
+        animator.SetBool("IsJumping", false);
     }
 
 	public IEnumerator SlowTime(float seconds)
