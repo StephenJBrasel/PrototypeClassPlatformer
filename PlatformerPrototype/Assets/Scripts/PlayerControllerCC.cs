@@ -52,6 +52,7 @@ public class PlayerControllerCC : MonoBehaviour
         this.fixedDeltaTime = Time.fixedDeltaTime;
         audioManager = FindObjectOfType<AudioManager>();
         if(animator == null) animator = GetComponent<Animator>();
+        animator.updateMode = AnimatorUpdateMode.UnscaledTime;
     }
 
 	// Start is called before the first frame update
@@ -95,7 +96,8 @@ public class PlayerControllerCC : MonoBehaviour
 		moveDirection.x = Input.GetAxisRaw("Horizontal") * speed * Time.unscaledDeltaTime;
 		moveDirection.z = 0f;
 
-        if(moveDirection.x > 0)
+		#region TURNING
+		if (moveDirection.x > 0)
         {
             transform.eulerAngles = Vector3.up * 90f;
         }
@@ -103,8 +105,9 @@ public class PlayerControllerCC : MonoBehaviour
         {
             transform.eulerAngles = Vector3.up * 270f;
         }
+		#endregion TURNING
 
-        animator.SetFloat("Speed", Mathf.Abs(moveDirection.x));
+		animator.SetFloat("Speed", Mathf.Abs(moveDirection.x));
 
 		#region JUMPING
 		if (characterController.isGrounded)
