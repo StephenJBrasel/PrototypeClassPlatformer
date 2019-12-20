@@ -619,8 +619,8 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 8d74c62051dcbe24eb59170e3cceb73e, type: 2}
+  - {fileID: 2100000, guid: e639426dff5dcfa40bf254c0ffc5f841, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -755,9 +755,35 @@ MonoBehaviour:
   lowJumpMultiplier: 4
   multiJumpDelay: 0.1
   maxJumps: 2
+  animator: {fileID: 6993835731283932080}
+  slowTime: 3
+  timePowerResetTime: 2
+  slowspeed: 0.08
   OnTimeSlowEvent:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_MethodName: Pause
+        m_Mode: 4
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: -1
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 0}
+        m_MethodName: ResetAlpha
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
   OnTimeResumeEvent:
@@ -765,9 +791,6 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
-  slowTime: 3
-  timePowerResetTime: 2
-  slowspeed: 0.08
 --- !u!114 &501338743361556464
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -789,7 +812,7 @@ Animator:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7190840337605686583}
   m_Enabled: 1
-  m_Avatar: {fileID: 0}
+  m_Avatar: {fileID: 9000000, guid: 45d480461bbdc704587e117329ce8e69, type: 3}
   m_Controller: {fileID: 9100000, guid: f297797635a2b7445ad2ea55cec7353b, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
@@ -1455,16 +1478,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7190840337606043927}
     m_Modifications:
-    - target: {fileID: 7914425809118856741, guid: b0e7340a016490f43b7b969e68a05dc2,
-        type: 3}
-      propertyPath: m_Name
-      value: EffectGlow
-      objectReference: {fileID: 0}
-    - target: {fileID: 7914425809118856741, guid: b0e7340a016490f43b7b969e68a05dc2,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 7914425809118856742, guid: b0e7340a016490f43b7b969e68a05dc2,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1519,6 +1532,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: -179.99998
+      objectReference: {fileID: 0}
+    - target: {fileID: 7914425809118856741, guid: b0e7340a016490f43b7b969e68a05dc2,
+        type: 3}
+      propertyPath: m_Name
+      value: EffectGlow
+      objectReference: {fileID: 0}
+    - target: {fileID: 7914425809118856741, guid: b0e7340a016490f43b7b969e68a05dc2,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b0e7340a016490f43b7b969e68a05dc2, type: 3}
