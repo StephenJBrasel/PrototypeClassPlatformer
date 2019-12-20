@@ -134,6 +134,7 @@ public class PlayerControllerCC : MonoBehaviour
             // We are grounded, so reset number of jumps and 
             // recalculate move direction directly from axes
             if (!wasGrounded) { OnLanding(); }
+            moveDirection.y = 0f;
             resetJumps();
             if (Input.GetButtonDown("Jump")) Jump();
         }
@@ -145,16 +146,18 @@ public class PlayerControllerCC : MonoBehaviour
         //if player is moving down, speed up the player so they reach the ground faster.
         if (moveDirection.y < 0f || characterController.velocity.y < 0f)
         {
-            moveDirection += (Vector3.up * -gravity * fallMultiplier * Time.unscaledDeltaTime);
+            moveDirection.y += (-gravity * fallMultiplier * Time.unscaledDeltaTime);
         }
         // if player is moving up but no longer holding down jump, slow the player.
         else if (moveDirection.y > 0f && !Input.GetButton("Jump"))
         {
-            moveDirection += (Vector3.up * -gravity * lowJumpMultiplier * Time.unscaledDeltaTime);
+            moveDirection.y += (-gravity * lowJumpMultiplier * Time.unscaledDeltaTime);
         }
+        
+        moveDirection.y -= (gravity * Time.unscaledDeltaTime);
 
-		moveDirection.y -= (gravity * Time.unscaledDeltaTime);
-		#endregion JUMPING
+        #endregion JUMPING
+
 
         wasGrounded = characterController.isGrounded;
         // Move the controller
