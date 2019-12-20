@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
+/// <summary>
+/// A player controller that expands on the base CharacterController.
+/// </summary>
+[RequireComponent(typeof(CharacterController))]
 public class PlayerControllerCC : MonoBehaviour
 {
     public float speed = 6.0f;
@@ -17,6 +21,10 @@ public class PlayerControllerCC : MonoBehaviour
 
     [SerializeField]
     private Animator animator = null;
+    [SerializeField]
+    private Transform itemLocation;
+    [SerializeField]
+    private LayerMask itemLayer;
     [SerializeField]
     private float slowTime = 3.0f;
     [SerializeField]
@@ -34,11 +42,16 @@ public class PlayerControllerCC : MonoBehaviour
     private CharacterController characterController;
     private ushort jumps = 0;
     private float jumpStartTime;
+    private float itemInteractStartTime;
+    private float itemInteractDelay = 0.2f;
     private Vector3 moveDirection = Vector3.zero;
     private bool timePowerIsReset = true;
     private bool wasGrounded = true;
+    private bool itemHeld = false;
+    private bool ItemKinematicState;
 
-	private float fixedDeltaTime;
+
+    private float fixedDeltaTime;
     private AudioManager audioManager;
 
     public bool resetJumps()
@@ -68,6 +81,11 @@ public class PlayerControllerCC : MonoBehaviour
         ManageTime();
     }
 
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawWireSphere(itemLocation.position, 0.2f);
+    }
+
     private void ManageTime()
     {
         if (Input.GetButtonDown("Fire1") && !slowdown && timePowerIsReset)
@@ -83,6 +101,7 @@ public class PlayerControllerCC : MonoBehaviour
 		}
 
         MoveCharacter();
+        ManipulateItems();
 
         if (slowdown)
         {
@@ -167,5 +186,46 @@ public class PlayerControllerCC : MonoBehaviour
         moveDirection.y = jumpSpeed;
         jumps++;
         jumpStartTime = Time.unscaledTime;
+    }
+
+    private void ManipulateItems()
+    {
+        if (Input.GetAxis("Fire2") > 0f && Time.unscaledTime - itemInteractStartTime > itemInteractDelay)
+        {
+            if (!itemHeld)
+            {
+                Collider[] items = Physics.OverlapSphere(itemLocation.position, 0.2f, itemLayer);
+                if(items.Length > 0)
+                {
+                    Rigidbody rb = items[0].GetComponent<Rigidbody>();
+                    if (rb)
+                    {
+                        ItemKinematicState = rb.isKinematic;
+                        rb.isKinematic = true;
+                    }
+                    items[0].transform.parent = itemLocation;
+                    items[0].transform.position = new Vector3 (
+                        items[0].transform.position.x, 
+                        itemLocation.position.y, 
+                        items[0].transform.position.z);
+                    itemHeld = true;
+                }
+            }
+            else
+            {
+                int childCount = itemLocation.childCount;
+                for (int i = 0; i < childCount; i++)
+                {
+                    Rigidbody rb = itemLocation.GetChild(i).GetComponent<Rigidbody>();
+                    if (rb)
+                    {
+                        rb.isKinematic = ItemKinematicState;
+                    }
+                    itemLocation.GetChild(i).transform.parent = null;
+                }
+                itemHeld = false;
+            }
+            itemInteractStartTime = Time.unscaledTime;
+        }
     }
 }
