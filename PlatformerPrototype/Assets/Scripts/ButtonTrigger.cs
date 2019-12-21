@@ -5,19 +5,31 @@ using UnityEngine;
 public class ButtonTrigger : MonoBehaviour
 {
 
-	public GameObject movePlatform1;
-	public GameObject movePlatform2;
+	public GameObject[] objectsToTrigger;
+	public MonoBehaviour[] componentsToTrigger; 
 
 	void OnTriggerStay(Collider other)
 	{
-		GameObject.Find(movePlatform1.name).GetComponent<MovePlatform>().enabled = true;
-		GameObject.Find(movePlatform2.name).GetComponent<MovePlatform>().enabled = true;
+		foreach (GameObject obj in objectsToTrigger)
+		{
+			obj.SetActive(true);
+		}
+		foreach (MonoBehaviour component in componentsToTrigger)
+		{
+			component.enabled = true;
+		}
 	}
 
 	private void OnTriggerExit(Collider other)
 	{
-		GameObject.Find(movePlatform1.name).GetComponent<MovePlatform>().enabled = false;
-		GameObject.Find(movePlatform2.name).GetComponent<MovePlatform>().enabled = false;
+		foreach (GameObject obj in objectsToTrigger)
+		{
+			obj.SetActive(false);
+		}
+		foreach (MonoBehaviour component in componentsToTrigger)
+		{
+			component.enabled = false;
+		}
 	}
 
 }

@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 3498847094644653143}
   - component: {fileID: 3498847094644653142}
-  - component: {fileID: 3498847094644653137}
   m_Layer: 0
   m_Name: ObjectSpawner
   m_TagString: Untagged
@@ -46,21 +45,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   interval: 3
   prefab: {fileID: 4793040087874620468, guid: 99925d0e82a1c454d8343996fc1e29a7, type: 3}
-  posx: 1.95
-  posy: 3.58
---- !u!114 &3498847094644653137
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3498847094644653136}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 91b234d51a6f41941a275a8addfdc844, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  interval: 3
-  prefab: {fileID: 4793040087874620468, guid: 99925d0e82a1c454d8343996fc1e29a7, type: 3}
-  posx: -1.09
-  posy: 4.09
+  useUpdate: 1
+  posx: 3.4028235e+38
+  posy: 3.4028235e+38
