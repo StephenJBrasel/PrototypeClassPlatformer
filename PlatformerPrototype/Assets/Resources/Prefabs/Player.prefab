@@ -760,7 +760,7 @@ CharacterController:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Height: 1.2
+  m_Height: 0.9
   m_Radius: 0.3
   m_SlopeLimit: 45
   m_StepOffset: 0.3
@@ -1513,6 +1513,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7190840337606043927}
     m_Modifications:
+    - target: {fileID: 7914425809118856741, guid: b0e7340a016490f43b7b969e68a05dc2,
+        type: 3}
+      propertyPath: m_Name
+      value: EffectGlow
+      objectReference: {fileID: 0}
+    - target: {fileID: 7914425809118856741, guid: b0e7340a016490f43b7b969e68a05dc2,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7914425809118856742, guid: b0e7340a016490f43b7b969e68a05dc2,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1567,16 +1577,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: -179.99998
-      objectReference: {fileID: 0}
-    - target: {fileID: 7914425809118856741, guid: b0e7340a016490f43b7b969e68a05dc2,
-        type: 3}
-      propertyPath: m_Name
-      value: EffectGlow
-      objectReference: {fileID: 0}
-    - target: {fileID: 7914425809118856741, guid: b0e7340a016490f43b7b969e68a05dc2,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b0e7340a016490f43b7b969e68a05dc2, type: 3}
